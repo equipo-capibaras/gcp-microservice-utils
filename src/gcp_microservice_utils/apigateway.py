@@ -2,6 +2,7 @@ import base64
 import json
 from flask import request
 
+
 def _api_gateway_before_request():
     userinfo = request.headers.get('X-Apigateway-Api-Userinfo')
 
@@ -14,9 +15,10 @@ def _api_gateway_before_request():
     try:
         userinfo_decoded = base64.urlsafe_b64decode(userinfo)
         request.user_token = json.loads(userinfo_decoded)
-    except:
+    except Exception:
         request.user_token = None
         return
+
 
 def setup_apigateway(app):
     app.before_request(_api_gateway_before_request)

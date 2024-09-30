@@ -5,6 +5,7 @@ from unittest import TestCase
 from contextlib import redirect_stderr
 from src.gcp_microservice_utils import setup_cloud_logging
 
+
 class TestLogging(TestCase):
     def test_structured_log(self):
         with redirect_stderr(io.StringIO()) as mock_stderr:

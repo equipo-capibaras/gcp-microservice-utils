@@ -4,6 +4,7 @@ from unittest import TestCase
 from flask import Flask, request
 from src.gcp_microservice_utils import setup_apigateway
 
+
 class TestApiGateway(TestCase):
     def setUp(self):
         self.app = Flask(__name__)
@@ -17,13 +18,13 @@ class TestApiGateway(TestCase):
 
         with self.client:
             self.client.get("/test", headers={'X-Apigateway-Api-Userinfo': userinfo_encoded})
-            
+
             self.assertEqual(request.user_token, userinfo)
 
     def test_before_request_with_invalid_userinfo(self):
         with self.client:
             self.client.get("/test", headers={'X-Apigateway-Api-Userinfo': 'invalid'})
-    
+
             self.assertIsNone(request.user_token)
 
     def test_before_request_without_userinfo(self):

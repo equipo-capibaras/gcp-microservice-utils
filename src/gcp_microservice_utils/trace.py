@@ -109,7 +109,7 @@ def _send_traces(sender, **extra):
         spans=gcp_spans
     )
 
-def TraceFunction(display_name):
+def trace_function(display_name):
     def decorator(func):
         def wrapper(*args, **kwargs):
             with TraceSpan(display_name):
