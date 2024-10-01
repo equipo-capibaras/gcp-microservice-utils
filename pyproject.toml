@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gcp-microservice-utils"
-version = "0.2.0"
+version = "0.2.1"
 description = "A Python library providing utilities to simplify the integration of various GCP Cloud services like, Cloud Logging, Cloud Trace, etc."
 requires-python = ">=3.8"
 readme = "README.md"
