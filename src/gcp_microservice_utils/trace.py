@@ -1,5 +1,5 @@
 import random
-from flask import current_app, request, g, request_tearing_down
+from flask import Flask, current_app, request, g, request_tearing_down
 from datetime import datetime, timezone
 import google.auth
 from google.cloud.trace_v2 import TraceServiceClient, Span
@@ -109,7 +109,7 @@ def _send_traces(sender, **extra):
         spans=gcp_spans
     )
 
-def trace_function(display_name):
+def trace_function(display_name: str):
     def decorator(func):
         def wrapper(*args, **kwargs):
             with TraceSpan(display_name):
@@ -117,7 +117,7 @@ def trace_function(display_name):
         return wrapper
     return decorator
 
-def setup_cloud_trace(app):
+def setup_cloud_trace(app: Flask) -> None:
     app.cloud_trace_client = TraceServiceClient()
     _, app.cloud_trace_project_id = google.auth.default()
 
